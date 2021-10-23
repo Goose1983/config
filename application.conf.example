@@ -1,0 +1,52 @@
+[Server]
+# Параметры развёртывание backend
+Host = "localhost"
+Port = "8443"
+Schema = "http"                                 # http | https. Если https, тол соединение будет по ssl, необходима настройка сертификатов
+Version = "2.1.2"
+Environment = "dev"
+    [Server.Frontend]
+    Schema = "http"
+    Host = "localhost"
+    Port = "3000"
+
+[App]
+PathToAvatars = "/opt/urms/avatars/"            # Полный путь до папки с аватарками
+PathToMigrationScripts = "./migrations/prod"    # Полный путь к скриптам миграции БД
+
+[Workers]
+# Вкл/Выкл воркеров (по умолчанию выключены (false))
+VMwareNightHandleActive = false
+
+[DSN]
+# Параметры подключения к БД
+Host = "localhost"
+Port = "3306"
+User = "[set your username here]"
+Pass = "[set your password here]"
+Base = "urms"
+
+[Logger]
+# Настройки логирования
+UseLogFile = false                              # Лог выводится в файл (true) или в консоль (false)
+AuditFile = "/opt/logs/audit.log"               # Путь до лога предоставления прав доступа к ресурсам проектов
+LogFile = "/opt/logs/urms.log"
+MaxSizeMb = 5
+MaxBackups = 20
+MaxAgeDays = 30
+Compress = true
+Prefix = "[URMS]"
+
+[SSL]
+# Пути до сертификатов при использовании ssl
+Cer = "/opt/urms/ssl/frontend_ssl.cer"
+Key = "/opt/urms/ssl/frontend_ssl.key"
+
+
+[VMWARE]
+# Настройки подключения к VMWate. Перед запуском сборки убедиться, что параметры актуальны
+Stand = "dev"                                   # Если значение не dev, то используются настройки из БД
+DevDomain = "dev.cmx.ru"
+DevLogin = "vadmin"
+DevPassword = "VMware99"
+DevApi = "https://devvcsa65.dev.cmx.ru"
